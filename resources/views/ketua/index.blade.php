@@ -34,7 +34,7 @@
                                     <th scope="col">Username</th>
                                 </tr>
                                 <tr>
-                                    <?php $no = 1; ?>
+                                    <?php $no = 1; ?> 
                                     @foreach ($ketu as $k)
                                         <th scope="row">{{ $no++ }}</th>
                                         <td> {{ $k->name }} </td>
