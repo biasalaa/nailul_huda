@@ -32,6 +32,7 @@
                                     <th scope="col">Foto Kegiatan</th>
                                     <th scope="col">Nama Kegiatan</th>
                                     <th scope="col">tanggal Kegiatan</th>
+                                    <th scope="col">Waktu Kegiatan</th>
                                     <th scope="col">Keterangan</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -40,10 +41,11 @@
                                     @foreach ($kegiatan as $kn)
                                         <th scope="row">{{ $no++ }}</th>
                                         <td>
-                                            <img src="{{asset('gambarKegiatan/'.$kn->gambar)}}" alt="img" style="width: 50px">
+                                            <img src="{{asset('gambarKegiatan/'.$kn->gambar)}}" alt="img" style="width: 70px">
                                         </td>
                                         <td>{{ $kn->nama_kegiatan }}</td>
                                         <td>{{ $kn->tgl_kegiatan }}</td>
+                                        <td>{{ $kn->waktu_kegiatan }}</td>
                                         <td>{{ $kn->keterangan }}</td>
                                         <td>
                                             <div class=" d-flex ">

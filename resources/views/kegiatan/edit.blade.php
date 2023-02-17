@@ -40,6 +40,15 @@
                             @enderror
                         </div>
                         <div class="form-group col-lg-12">
+                            <label>Waktu Kegiatan</label>
+                            <input type="time" name="waktu_kegiatan" class="form-control" value="{{ $kegiatan->waktu_kegiatan }}">
+                            @error('waktu_kegiatan')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-12">
                             <label>Keterangan</label>
                             <input type="text" name="keterangan" class="form-control" value="{{ $kegiatan->keterangan }}">
                             @error('keterangan')

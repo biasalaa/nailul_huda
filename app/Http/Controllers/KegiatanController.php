@@ -42,11 +42,13 @@ class KegiatanController extends Controller
                 'gambar' => 'required',
                 'nama_kegiatan' => 'required',
                 'tgl_kegiatan' => 'required',
+                'waktu_kegiatan' => 'required',
                 'keterangan' => 'required',
             ],
             [
                 'gambar.required' => 'gambar wajib di isi',
                 'nama_kegiatan.required' => 'Nama wajib di isi',
+                'waktu_kegiatan.required' => 'Waktu Kegiatan wajib di isi',
                 'tgl_kegiatan.required' => 'Tanggal wajib di isi',
                 'keterangan.required' => 'Keterangan wajib di isi',
             ]
@@ -56,6 +58,7 @@ class KegiatanController extends Controller
         $gambar = Request()->file('gambar');
         $nama_kegiatan = Request()->nama_kegiatan;
         $tgl_kegiatan = Request()->tgl_kegiatan;
+        $waktu_kegiatan = Request()->waktu_kegiatan;
         $keterangan = Request()->keterangan;
 
 
@@ -64,6 +67,7 @@ class KegiatanController extends Controller
         DB::table('kegiatan')->insert([
             'gambar' => $namagambar,
             'nama_kegiatan' => $nama_kegiatan,
+            'waktu_kegiatan' => $waktu_kegiatan,
             'tgl_kegiatan' => $tgl_kegiatan,
             'keterangan' => $keterangan,
         ]);
@@ -108,11 +112,13 @@ class KegiatanController extends Controller
                 'gambar' => 'required',
                 'nama_kegiatan' => 'required',
                 'tgl_kegiatan' => 'required',
+                'waktu_kegiatan' => 'required',
                 'keterangan' => 'required',
             ],
             [
                 'gambar.required' => 'gambar wajib di isi',
                 'nama_kegiatan.required' => 'Nama wajib di isi',
+                'waktu_kegiatan.required' => 'Waktu Kegiatan wajib di isi',
                 'tgl_kegiatan.required' => 'Tanggal wajib di isi',
                 'keterangan.required' => 'Keterangan wajib di isi',
             ]
@@ -122,6 +128,7 @@ class KegiatanController extends Controller
         $gambar = Request()->file('gambar');
         $nama_kegiatan = Request()->nama_kegiatan;
         $tgl_kegiatan = Request()->tgl_kegiatan;
+        $waktu_kegiatan = Request()->waktu_kegiatan;
         $keterangan = Request()->keterangan;
 
         $namagambar = time().$gambar->getClientOriginalName();
@@ -129,6 +136,7 @@ class KegiatanController extends Controller
         DB::table('kegiatan')->where('id', $id)->update([
             'gambar' => $namagambar,
             'nama_kegiatan' => $nama_kegiatan,
+            'waktu_kegiatan' => $waktu_kegiatan,
             'tgl_kegiatan' => $tgl_kegiatan,
             'keterangan' => $keterangan,
         ]);
