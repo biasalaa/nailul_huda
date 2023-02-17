@@ -11,7 +11,7 @@ use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\TahunController;
 use App\Http\Controllers\BioController;
 use App\Http\Controllers\ActionController;
-use App\Http\Controllers\DashboardController;
+
 
 
 /*
@@ -40,6 +40,6 @@ Route::resource('/NAILUL-HUDA/bio', BioController::class);
 
 Route::get('/NAILUL-HUDA/pemasukan', [ActionController::class, 'index']);
 Route::post('/proses', [ActionController::class, 'proses']);
-Route::post('/sukses{id}', [ActionController::class, 'sukses']);
-Route::post('/hapus{id}', [ActionController::class, 'proses']);
+Route::post('/sukses/{id}', [ActionController::class, 'sukses']);
+Route::post('/hapus/{id}', [ActionController::class, 'proses']);
 Route::get('/NAILUL-HUDA/dataConfirm', [ActionController::class, 'konfirm']);

@@ -39,7 +39,7 @@
                                     @foreach ($pembayaran as $p)
                                         <th scope="row">{{ $no++ }}</th>
                                         <td> {{ $p->tingkatan }} {{ $p->nama_jurusan }} {{ $p->no_kelas }}</td>
-                                        <td> {{ $p->jumlah }} </td>
+                                        <td>Rp {{ $p->jumlah }} </td>
                                         <td> {{ $p->tanggal }} </td>
                                         <td>
                                             <div class=" d-flex ">
