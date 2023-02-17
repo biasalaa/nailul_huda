@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Str;
 
 class KetuController extends Controller
 {
@@ -17,10 +17,11 @@ class KetuController extends Controller
     public function index()
     {
         $ketu = DB::table('ketua')
-        ->select('nama_jurusan', 'kelas.*', 'ketua.*')
-        ->join('kelas', 'ketua.id_kelas', 'kelas.id')
-        ->join('jurusan', 'kelas.id_jurusan', 'jurusan.id')
-        ->get();
+            ->select('nama_jurusan', 'kelas.*', 'ketua.*')
+            ->join('kelas', 'ketua.id_kelas', 'kelas.id')
+            ->join('jurusan', 'kelas.id_jurusan', 'jurusan.id')
+            ->join('tahun_ajaran', 'kelas.id_tahun', 'tahun_ajaran.id')
+            ->get();
         return view('ketua.index', compact('ketu'));
     }
 
@@ -32,10 +33,10 @@ class KetuController extends Controller
     public function create()
     {
         $kelas = DB::table('kelas')
-        ->select('nama_jurusan', 'tahun_ajaran', 'kelas.*', )
-        ->join('jurusan', 'kelas.id_jurusan', 'jurusan.id')
-        ->join('tahun_ajaran', 'kelas.id_tahun', 'tahun_ajaran.id')
-        ->get();
+            ->select('nama_jurusan', 'tahun_ajaran', 'kelas.*',)
+            ->join('jurusan', 'kelas.id_jurusan', 'jurusan.id')
+            ->join('tahun_ajaran', 'kelas.id_tahun', 'tahun_ajaran.id')
+            ->get();
         return view('ketua.create', compact('kelas'));
     }
 
@@ -47,28 +48,32 @@ class KetuController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         Request()->validate(
             [
-                'name'=>'required',
-                'email'=>'required',
-                'password'=>'required',
+                'name' => 'required',
+                'email' => 'required',
+                'password' => 'required',
+                'id_kelas' => 'required',
             ]
         );
 
         $nama = Str::upper(Request()->name);
         $email = (Request()->email);
         $password = (Request()->password);
+        $kelas = (Request()->id_kelas);
 
 
         // insert data to database
-        DB::table('users')->insert([
-            'name'=>$nama,
-            'email'=>$email,
-            'password'=>Hash::make($password) ,
+        DB::table('ketua')->insert([
+            'name' => $nama,
+            'email' => $email,
+            'password' => Hash::make($password),
+            'id_kelas' => $kelas,
         ]);
 
 
-        return redirect('/NAILUL-HUDA/ketu')->with('success','Berhasil Menambah Data Ketua Kelas ');
+        return redirect('/NAILUL-HUDA/ketu')->with('success', 'Berhasil Menambah Data Ketua Kelas ');
     }
 
     /**
