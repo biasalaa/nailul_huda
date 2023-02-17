@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Str;
 
 class BioController extends Controller
 {
@@ -13,7 +15,8 @@ class BioController extends Controller
      */
     public function index()
     {
-        //
+        $bio = DB::table('bio')->get();
+        return view('bio.index', compact('bio'));
     }
 
     /**
@@ -23,7 +26,7 @@ class BioController extends Controller
      */
     public function create()
     {
-        //
+        return view('bio.create');
     }
 
     /**
@@ -34,7 +37,23 @@ class BioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        Request()->validate(
+            [
+                'nama_masjid'=>'required',
+            ]
+        );
+
+        $bio = Str::upper(Request()->nama_masjid);
+
+
+        // insert data to database
+        DB::table('bio')->insert([
+            'nama_masjid'=>$bio,
+        ]);
+
+
+        return redirect('/NAILUL-HUDA/bio')->with('success','Berhasil Menambah Bio Data Masjid');
     }
 
     /**
@@ -56,7 +75,8 @@ class BioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bio = DB::table('bio')->where('id', $id)->first();
+        return view('bio.edit', compact('bio'));
     }
 
     /**
@@ -68,7 +88,20 @@ class BioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Request()->validate(
+            [
+                'nama_masjid'=>'required',
+            ]
+        );
+
+        $bio = Str::upper(Request()->nama_masjid);
+
+        // update data to database
+        DB::table('bio')->where('id',$id)->update([
+            'nama_masjid'=>$bio,
+        ]);
+
+        return redirect('/NAILUL-HUDA/bio')->with('success','Berhasil Mengedit Bio Data Masjid');
     }
 
     /**
@@ -79,6 +112,7 @@ class BioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('bio')->where('id', $id)->delete();
+        return redirect()->back()->with('success', 'Bio Data Masjid berhasil di hapus');
     }
 }
