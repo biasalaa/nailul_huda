@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class KegiatanController extends Controller
 {
@@ -13,7 +15,8 @@ class KegiatanController extends Controller
      */
     public function index()
     {
-        //
+        $kegiatan = DB::table('kegiatan')->get();
+        return view('kegiatan.index', compact('kegiatan'));
     }
 
     /**
@@ -23,7 +26,7 @@ class KegiatanController extends Controller
      */
     public function create()
     {
-        //
+        return view('kegiatan.create');
     }
 
     /**
@@ -34,7 +37,38 @@ class KegiatanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'gambar' => 'required',
+                'nama_kegiatan' => 'required',
+                'tgl_kegiatan' => 'required',
+                'keterangan' => 'required',
+            ],
+            [
+                'gambar.required' => 'gambar wajib di isi',
+                'nama_kegiatan.required' => 'Nama wajib di isi',
+                'tgl_kegiatan.required' => 'Tanggal wajib di isi',
+                'keterangan.required' => 'Keterangan wajib di isi',
+            ]
+        );
+
+        $kegiatan = Str::upper($request->kegiatan);
+        $gambar = Request()->file('gambar');
+        $nama_kegiatan = Request()->nama_kegiatan;
+        $tgl_kegiatan = Request()->tgl_kegiatan;
+        $keterangan = Request()->keterangan;
+
+
+        $namagambar = time().$gambar->getClientOriginalName();
+        $gambar->move(public_path("gambarKegiatan"),$namagambar);
+        DB::table('kegiatan')->insert([
+            'gambar' => $namagambar,
+            'nama_kegiatan' => $nama_kegiatan,
+            'tgl_kegiatan' => $tgl_kegiatan,
+            'keterangan' => $keterangan,
+        ]);
+
+        return redirect('/NAILUL-HUDA/kegiatan')->with('success','Berhasil Menambahkan Kegiatan');
     }
 
     /**
@@ -56,7 +90,8 @@ class KegiatanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kegiatan = DB::table('kegiatan')->where('id', $id)->first();
+        return view('kegiatan.edit', compact('kegiatan'));
     }
 
     /**
@@ -68,7 +103,37 @@ class KegiatanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            [
+                'gambar' => 'required',
+                'nama_kegiatan' => 'required',
+                'tgl_kegiatan' => 'required',
+                'keterangan' => 'required',
+            ],
+            [
+                'gambar.required' => 'gambar wajib di isi',
+                'nama_kegiatan.required' => 'Nama wajib di isi',
+                'tgl_kegiatan.required' => 'Tanggal wajib di isi',
+                'keterangan.required' => 'Keterangan wajib di isi',
+            ]
+        );
+
+        $kegiatan = Str::upper($request->kegiatan);
+        $gambar = Request()->file('gambar');
+        $nama_kegiatan = Request()->nama_kegiatan;
+        $tgl_kegiatan = Request()->tgl_kegiatan;
+        $keterangan = Request()->keterangan;
+
+        $namagambar = time().$gambar->getClientOriginalName();
+        $gambar->move(public_path("gambarKegiatan"),$namagambar);
+        DB::table('kegiatan')->where('id', $id)->update([
+            'gambar' => $namagambar,
+            'nama_kegiatan' => $nama_kegiatan,
+            'tgl_kegiatan' => $tgl_kegiatan,
+            'keterangan' => $keterangan,
+        ]);
+
+        return redirect('/NAILUL-HUDA/kegiatan')->with('success','Berhasil Menambahkan Kegiatan');
     }
 
     /**
@@ -79,6 +144,7 @@ class KegiatanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('kegiatan')->where('id', $id)->delete();
+        return redirect()->back()->with('success', 'kegiatan berhasil di hapus');
     }
 }
