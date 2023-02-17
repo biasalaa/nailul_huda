@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Str;
 
-class PengurusController extends Controller
+class KetuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +16,12 @@ class PengurusController extends Controller
      */
     public function index()
     {
-        $pengurus = DB::table('users')->where('role', 'pengurus')->get();
-        return view('pengurus.index', compact('pengurus'));
+        $ketu = DB::table('ketua')
+        ->select('nama_jurusan', 'kelas.*', 'ketua.*')
+        ->join('kelas', 'ketua.id_kelas', 'kelas.id')
+        ->join('jurusan', 'kelas.id_jurusan', 'jurusan.id')
+        ->get();
+        return view('ketua.index', compact('ketu'));
     }
 
     /**
@@ -27,7 +31,12 @@ class PengurusController extends Controller
      */
     public function create()
     {
-        return view('pengurus.create');
+        $kelas = DB::table('kelas')
+        ->select('nama_jurusan', 'tahun_ajaran', 'kelas.*', )
+        ->join('jurusan', 'kelas.id_jurusan', 'jurusan.id')
+        ->join('tahun_ajaran', 'kelas.id_tahun', 'tahun_ajaran.id')
+        ->get();
+        return view('ketua.create', compact('kelas'));
     }
 
     /**
@@ -49,7 +58,6 @@ class PengurusController extends Controller
         $nama = Str::upper(Request()->name);
         $email = (Request()->email);
         $password = (Request()->password);
-        $role = (Request()->role);
 
 
         // insert data to database
@@ -57,11 +65,10 @@ class PengurusController extends Controller
             'name'=>$nama,
             'email'=>$email,
             'password'=>Hash::make($password) ,
-            'role'=>$role,
         ]);
 
 
-        return redirect('/NAILUL-HUDA/pengurus')->with('success','Berhasil Menambah Pengurus');
+        return redirect('/NAILUL-HUDA/ketu')->with('success','Berhasil Menambah Data Ketua Kelas ');
     }
 
     /**
@@ -83,8 +90,7 @@ class PengurusController extends Controller
      */
     public function edit($id)
     {
-        $pengurus = DB::table('users')->where('id', $id);
-        return view('pengurus.edit', compact('pengurus'));
+        //
     }
 
     /**
@@ -96,23 +102,7 @@ class PengurusController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Request()->validate(
-            [
-                'name'=>'required',
-                'email'=>'required',
-            ]
-        );
-
-        $name = Str::upper(Request()->name);
-        $email = Request()->email;
-
-        // update data to database
-        DB::table('users')->where('id',$id)->update([
-            'name'=>$name,
-            'email'=>$email,
-        ]);
-
-        return redirect('/NAILUL-HUDA/pengurus')->with('success','Berhasil Mengedit pengurus');
+        //
     }
 
     /**
@@ -123,7 +113,6 @@ class PengurusController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('users')->where('id', $id)->delete();
-        return redirect()->back()->with('success', 'Pengurus berhasil di hapus');
+        //
     }
 }

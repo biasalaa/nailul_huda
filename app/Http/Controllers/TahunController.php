@@ -54,7 +54,7 @@ class TahunController extends Controller
         ]);
 
 
-        return redirect('/NAILUL-HUDA/tahun')->with('success','Berhasil Menambah Tahun Ajaran');
+        return redirect('/NAILUL-HUDA/tahun')->with('success','Berhasil Menambah Pengurus');
     }
 
     /**
@@ -76,7 +76,8 @@ class TahunController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pegawai = DB::table('users')->where('id',$id)->first();
+        return view('pengurus.edit', compact('pegawai'));
     }
 
     /**

@@ -2,19 +2,19 @@
 
     @section('header')
         <div class="section-header">
-            <h1>Tambah Data Pengurus</h1>
+            <h1>Tambah Data Ketua Kelas</h1>
         </div>
     @endsection
 
     @section('content')
         <div class="section-body">
             <div class="card">
-                <form action="/NAILUL-HUDA/pengurus" method="POST">
+                <form action="/NAILUL-HUDA/ketu" method="POST">
                     @csrf
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-lg-12">
-                                <label>Nama</label>
+                                <label>Nama Lengkap</label>
                                 <input type="text" name="name" class="form-control">
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                             </div>
                         </div>
 
-                        <input type="hidden" name="role" value="pengurus">
+                        <input type="hidden" name="role" value="ketu">
 
 
                         <div class="card-footer text-right">

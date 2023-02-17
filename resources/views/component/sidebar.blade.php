@@ -20,10 +20,14 @@
                 <span>Import Dana</span></a>
         </li>
         <li class="nav-item {{ Request()->is('/NAILUL-HUDA/export') ? 'active' : '' }}">
-            <a href="/NAILUL-HUDA/export" class="nav-link "><i class="fas fa-print"></i>
-                <span>Export Dana</span></a>
+            <a href="/NAILUL-HUDA/dataConfirm" class="nav-link "><i class="fas fa-print"></i>
+                <span>Data Pemasukan</span></a>
         </li>
         <li class="menu-header">Siswa</li>
+        <li class="nav-item {{ Request()->is('/NAILUL-HUDA/ketu') ? 'active' : '' }}">
+            <a href="/NAILUL-HUDA/ketu" class="nav-link "><i class="far fa-user"></i>
+                <span>Ketua Kelas</span></a>
+        </li>
         <li class="nav-item {{ Request()->is('/NAILUL-HUDA/kelas') ? 'active' : '' }}">
             <a href="/NAILUL-HUDA/kelas" class="nav-link "><i class="fas fa-th-large"></i>
                 <span>Kelas</span></a>
@@ -38,11 +42,11 @@
                 <span>Pengurus</span></a>
         </li>
         <li class="nav-item {{ Request()->is('/NAILUL-HUDA/tahun') ? 'active' : '' }}">
-            <a href="/NAILUL-HUDA/tahun" class="nav-link "><i class="far fa-user"></i>
+            <a href="/NAILUL-HUDA/tahun" class="nav-link "><i class="fas fa-date"></i>
                 <span>Tahun Ajaran</span></a>
         </li>
         <li class="nav-item {{ Request()->is('/NAILUL-HUDA/bio') ? 'active' : '' }}">
-            <a href="/NAILUL-HUDA/bio" class="nav-link "><i class="far fa-user"></i>
+            <a href="/NAILUL-HUDA/bio" class="nav-link "><i class="fas fa-setting"></i>
                 <span>Biodata</span></a>
         </li>
     </ul>

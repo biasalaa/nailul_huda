@@ -60,6 +60,10 @@
             "pestphp/pest-plugin": true
         }
     },
+    "dependencies": {
+    "select2": "~4.0"
+    },
     "minimum-stability": "stable",
     "prefer-stable": true
+
 }

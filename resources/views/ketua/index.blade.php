@@ -2,7 +2,7 @@
 
 @section('header')
     <div class="section-header">
-        <h1>Pengurus Masjid</h1>
+        <h1>Ketua Kelas</h1>
     </div>
 @endsection
 
@@ -10,7 +10,7 @@
     <div class="section-body">
         <div class="card">
             <div class="card-header">
-                <a href="/NAILUL-HUDA/pengurus/create" class="btn btn-success" style="color:white ;">Tambah Data</a>
+                <a href="/NAILUL-HUDA/ketu/create" class="btn btn-success" style="color:white ;">Tambah Data</a>
             </div>
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible show fade">
@@ -30,23 +30,25 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nama</th>
+                                    <th scope="col">Kelas</th>
                                     <th scope="col">Username</th>
                                 </tr>
                                 <tr>
                                     <?php $no = 1; ?>
-                                    @foreach ($pengurus as $p)
+                                    @foreach ($ketu as $k)
                                         <th scope="row">{{ $no++ }}</th>
-                                        <td> {{ $p->name }} </td>
-                                        <td> {{ $p->email }} </td>
+                                        <td> {{ $k->name }} </td>
+                                        <td>{{ $k->tingkatan }} {{ $k->nama_jurusan }} {{ $k->no_kelas }}</td>
+                                        <td> {{ $k->email }} </td>
                                         <td>
                                             <div class=" d-flex ">
                                                 <div class="m-1">
-                                                    <a href="/NAILUL-HUDA/pengurus/{{ $p->id }}/edit"
+                                                    <a href="/NAILUL-HUDA/pengurus/{{ $k->id }}/edit"
                                                         class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                                 </div>
                                                 <div class="m-1">
                                                     <form class="d-inline"
-                                                        action="/NAILUL-HUDA/pengurus/{{ $p->id }}" method="POST">
+                                                        action="/NAILUL-HUDA/pengurus/{{ $k->id }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger" type="submit"><i

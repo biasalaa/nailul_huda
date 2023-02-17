@@ -2,7 +2,7 @@
 
 @section('header')
     <div class="section-header">
-        <h1>Pengurus Masjid</h1>
+        <h1>Data Konfirmasi</h1>
     </div>
 @endsection
 
@@ -10,7 +10,7 @@
     <div class="section-body">
         <div class="card">
             <div class="card-header">
-                <a href="/NAILUL-HUDA/pengurus/create" class="btn btn-success" style="color:white ;">Tambah Data</a>
+                <a href="/NAILUL-HUDA/pemasukan" class="btn btn-success" style="color:white ;">Tambah Data</a>
             </div>
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible show fade">
@@ -29,28 +29,34 @@
                             <table class="table table-striped table-md">
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Username</th>
+                                    <th scope="col">Kelas</th>
+                                    <th scope="col">Dana</th>
+                                    <th scope="col">Tanggal</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                                 <tr>
                                     <?php $no = 1; ?>
-                                    @foreach ($pengurus as $p)
+                                    @foreach ($pembayaran as $p)
                                         <th scope="row">{{ $no++ }}</th>
-                                        <td> {{ $p->name }} </td>
-                                        <td> {{ $p->email }} </td>
+                                        <td> {{ $p->tingkatan }} {{ $p->nama_jurusan }} {{ $p->no_kelas }}</td>
+                                        <td> {{ $p->jumlah }} </td>
+                                        <td> {{ $p->tanggal }} </td>
                                         <td>
                                             <div class=" d-flex ">
                                                 <div class="m-1">
-                                                    <a href="/NAILUL-HUDA/pengurus/{{ $p->id }}/edit"
-                                                        class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                                    <form class="d-inline" action="/sukses/{{ $p->id }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button class="btn btn-success" type="submit">Sukses</button>
+                                                    </form>
                                                 </div>
                                                 <div class="m-1">
-                                                    <form class="d-inline"
-                                                        action="/NAILUL-HUDA/pengurus/{{ $p->id }}" method="POST">
+                                                    <form class="d-inline" action="/hapus/{{ $p->id }}"
+                                                        method="POST">
                                                         @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger" type="submit"><i
-                                                                class="fas fa-trash"></i></button>
+                                                        @method('PUT')
+                                                        <button class="btn btn-danger" type="submit">Cancel</i></button>
                                                     </form>
                                                 </div>
                                             </div>

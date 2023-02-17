@@ -13,17 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sementara', function (Blueprint $table) {
+        Schema::create('ketua_kelas', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->bigInteger('id_kelas')->unsigned();
-            $table->bigInteger('id_pengurus')->unsigned();
-            $table->string('jumlah');
-            $table->enum('status', ['sukses', 'cancel', 'unsukses']);
-            $table->datetime('tanggal');
             $table->timestamps();
 
             $table->foreign('id_kelas')->references('id')->on('kelas')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('id_pengurus')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sementara');
+        Schema::dropIfExists('ketua_kelas');
     }
 };

@@ -15,10 +15,14 @@ class CreatePemasukanTable extends Migration
     {
         Schema::create('pemasukan', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_sementara')->unsigned();
+            $table->bigInteger('id_kelas')->unsigned();;
+            $table->string('jumlah');
+            $table->enum('status', ['sukses', 'cancel', 'unsukses']);
+            $table->datetime('tanggal');
+            $table->integer('countUpdate');
             $table->timestamps();
 
-            $table->foreign('id_sementara')->references('id')->on('sementara')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_kelas')->references('id')->on('kelas')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
