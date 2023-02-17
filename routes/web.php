@@ -11,6 +11,7 @@ use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\TahunController;
 use App\Http\Controllers\BioController;
 use App\Http\Controllers\ActionController;
+use App\Http\Controllers\DashboardController;
 
 
 /*

@@ -2,7 +2,7 @@
 
 @section('header')
     <div class="section-header">
-        <h1>Bio Data Masjid</h1>
+        <h1>Kegiatan</h1>
     </div>
 @endsection
 
@@ -10,7 +10,7 @@
     <div class="section-body">
         <div class="card">
             <div class="card-header">
-                <a href="/NAILUL-HUDA/bio/create" class="btn btn-success" style="color:white ;">Tambah Bio Data Mssjid</a>
+                <a href="/NAILUL-HUDA/kegiatan/create" class="btn btn-success" style="color:white ;">Tambah Data</a>
             </div>
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible show fade">
@@ -29,22 +29,30 @@
                             <table class="table table-striped table-md">
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Tahun Ajaran</th>
+                                    <th scope="col">Foto Kegiatan</th>
+                                    <th scope="col">Nama Kegiatan</th>
+                                    <th scope="col">tanggal Kegiatan</th>
+                                    <th scope="col">Keterangan</th>
                                     <th scope="col">Action</th>
                                 </tr>
                                 <tr>
                                     <?php $no = 1; ?>
-                                    @foreach ($bio as $b)
+                                    @foreach ($kegiatan as $kn)
                                         <th scope="row">{{ $no++ }}</th>
-                                        <td>{{ $b->nama_masjid }} </td>
                                         <td>
-                                            <div class="row d-flex">
+                                            <img src="{{asset('gambarKegiatan/'.$kn->gambar)}}" alt="img" style="width: 50px">
+                                        </td>
+                                        <td>{{ $kn->nama_kegiatan }}</td>
+                                        <td>{{ $kn->tgl_kegiatan }}</td>
+                                        <td>{{ $kn->keterangan }}</td>
+                                        <td>
+                                            <div class=" d-flex ">
                                                 <div class="m-1">
-                                                    <a href="/NAILUL-HUDA/bio/{{ $b->id }}/edit"
+                                                    <a href="/NAILUL-HUDA/kegiatan/{{ $kn->id }}/edit"
                                                         class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                                 </div>
                                                 <div class="m-1">
-                                                    <form class="d-inline" action="/NAILUL-HUDA/bio/{{ $b->id }}"
+                                                    <form class="d-inline" action="/NAILUL-HUDA/kegiatan/{{ $kn->id }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
