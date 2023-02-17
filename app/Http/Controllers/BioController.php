@@ -26,7 +26,8 @@ class BioController extends Controller
      */
     public function create()
     {
-        return view('bio.create');
+        $bio = DB::table('bio')->get();
+        return view('bio.create', compact('bio'));
     }
 
     /**

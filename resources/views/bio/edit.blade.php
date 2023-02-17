@@ -10,9 +10,9 @@
     {{-- @dd($jurusan) --}}
     <div class="section-body">
         <div class="card">
-            <form method="POST" action="/NAILUL-HUDA/bio" >
-                @csrf
+            <form method="POST" action="/NAILUL-HUDA/bio/{{$bio->$id}}" >
                 @method('PUT')
+                @csrf
                 <div class="card-body">
                     <div class="row">
                         <div class="form-group col-lg-12">
