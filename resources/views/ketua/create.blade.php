@@ -13,9 +13,19 @@
                     @csrf
                     <div class="card-body">
                         <div class="row">
-                            <div class="form-group col-lg-12">
+                            <div class="form-group col-lg-6">
                                 <label>Nama Lengkap</label>
                                 <input type="text" name="name" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <label>Kelas</label>
+                                <select class="form-control" name="id_kelas">
+                                    <option value="">Pilih Disini</option>
+                                    @foreach ($kelas as $k)
+                                        <option value="{{ $k->id }}">{{ $k->tingkatan }} {{ $k->nama_jurusan }}
+                                            {{ $k->no_kelas }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -29,9 +39,6 @@
                                 <input type="text" name="password" class="form-control">
                             </div>
                         </div>
-
-                        <input type="hidden" name="role" value="ketu">
-
 
                         <div class="card-footer text-right">
                             <button class="btn btn-primary mr-1" type="submit">Submit</button>

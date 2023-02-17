@@ -2,7 +2,7 @@
 
 @section('header')
     <div class="section-header">
-        <h1>Data Konfirmasi</h1>
+        <h1>Kegiatan</h1>
     </div>
 @endsection
 
@@ -10,7 +10,7 @@
     <div class="section-body">
         <div class="card">
             <div class="card-header">
-                <a href="/NAILUL-HUDA/pemasukan" class="btn btn-success" style="color:white ;">Tambah Data</a>
+                <a href="/NAILUL-HUDA/kegiatan/create" class="btn btn-success" style="color:white ;">Tambah Data</a>
             </div>
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible show fade">
@@ -29,34 +29,37 @@
                             <table class="table table-striped table-md">
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Kelas</th>
-                                    <th scope="col">Dana</th>
-                                    <th scope="col">Tanggal</th>
+                                    <th scope="col">Foto Kegiatan</th>
+                                    <th scope="col">Nama Kegiatan</th>
+                                    <th scope="col">tanggal Kegiatan</th>
+                                    <th scope="col">Waktu Kegiatan</th>
+                                    <th scope="col">Keterangan</th>
                                     <th scope="col">Action</th>
                                 </tr>
                                 <tr>
                                     <?php $no = 1; ?>
-                                    @foreach ($pembayaran as $p)
+                                    @foreach ($kegiatan as $kn)
                                         <th scope="row">{{ $no++ }}</th>
-                                        <td> {{ $p->tingkatan }} {{ $p->nama_jurusan }} {{ $p->no_kelas }}</td>
-                                        <td>Rp {{ $p->jumlah }} </td>
-                                        <td> {{ $p->tanggal }} </td>
+                                        <td>
+                                            <img src="{{asset('gambarKegiatan/'.$kn->gambar)}}" alt="img" style="width: 70px">
+                                        </td>
+                                        <td>{{ $kn->nama_kegiatan }}</td>
+                                        <td>{{ $kn->tgl_kegiatan }}</td>
+                                        <td>{{ $kn->waktu_kegiatan }}</td>
+                                        <td>{{ $kn->keterangan }}</td>
                                         <td>
                                             <div class=" d-flex ">
                                                 <div class="m-1">
-                                                    <form class="d-inline" action="/sukses/{{ $p->id }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button class="btn btn-success" type="submit">Sukses</button>
-                                                    </form>
+                                                    <a href="/NAILUL-HUDA/kegiatan/{{ $kn->id }}/edit"
+                                                        class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                                 </div>
                                                 <div class="m-1">
-                                                    <form class="d-inline" action="/hapus/{{ $p->id }}"
+                                                    <form class="d-inline" action="/NAILUL-HUDA/kegiatan/{{ $kn->id }}"
                                                         method="POST">
                                                         @csrf
-                                                        @method('PUT')
-                                                        <button class="btn btn-danger" type="submit">Cancel</i></button>
+                                                        @method('DELETE')
+                                                        <button class="btn btn-danger" type="submit"><i
+                                                                class="fas fa-trash"></i></button>
                                                     </form>
                                                 </div>
                                             </div>
@@ -66,7 +69,6 @@
                             </table>
                         </div>
                     </div>
-
                     <div class="card-footer text-right">
                         <nav class="d-inline-block">
                             <ul class="pagination mb-0">
