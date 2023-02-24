@@ -10,7 +10,7 @@
     <div class="section-body">
         <div class="card">
             <div class="card-header">
-                <a href="/NAILUL-HUDA/bio/create" class="btn btn-success" style="color:white ;">Tambah Bio Data Mssjid</a>
+                <a href="/NAILUL-HUDA/bio/create" class="btn btn-success" style="color:white ;">Tambah Bio Data Masjid</a>
             </div>
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible show fade">
@@ -29,7 +29,7 @@
                             <table class="table table-striped table-md">
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Tahun Ajaran</th>
+                                    <th scope="col">Nama Masjid</th>
                                     <th scope="col">Action</th>
                                 </tr>
                                 <tr>
