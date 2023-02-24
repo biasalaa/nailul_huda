@@ -12,6 +12,16 @@
             <div class="card-header">
                 <a href="/NAILUL-HUDA/pemasukan" class="btn btn-success" style="color:white ;">Tambah Data</a>
             </div>
+            @if (session('pesan'))
+                <div class="alert alert-danger alert-dismissible show fade">
+                    <div class="alert-body">
+                        <button class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                        </button>
+                        {{ session('pesan') }}
+                    </div>
+                </div>
+            @endif
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible show fade">
                     <div class="alert-body">
@@ -47,15 +57,13 @@
                                                     <form class="d-inline" action="/sukses/{{ $p->id }}"
                                                         method="POST">
                                                         @csrf
-                                                        @method('PUT')
                                                         <button class="btn btn-success" type="submit">Sukses</button>
                                                     </form>
                                                 </div>
                                                 <div class="m-1">
-                                                    <form class="d-inline" action="/hapus/{{ $p->id }}"
+                                                    <form class="d-inline" action="/cancel/{{ $p->id }}"
                                                         method="POST">
                                                         @csrf
-                                                        @method('PUT')
                                                         <button class="btn btn-danger" type="submit">Cancel</i></button>
                                                     </form>
                                                 </div>

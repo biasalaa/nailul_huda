@@ -41,5 +41,5 @@ Route::resource('/NAILUL-HUDA/bio', BioController::class);
 Route::get('/NAILUL-HUDA/pemasukan', [ActionController::class, 'index']);
 Route::post('/proses', [ActionController::class, 'proses']);
 Route::post('/sukses/{id}', [ActionController::class, 'sukses']);
-Route::post('/hapus/{id}', [ActionController::class, 'proses']);
+Route::post('/cancel/{id}', [ActionController::class, 'cancel']);
 Route::get('/NAILUL-HUDA/dataConfirm', [ActionController::class, 'konfirm']);

@@ -63,11 +63,29 @@ class ActionController extends Controller
 
     public function sukses(Request $request, $id)
     {
-        dd('s');
-        DB::table('pemasukan')->where('id', $id)->update([
-            'status' => 'sukses',
-            'countUpdate' => +1
-        ]);
+        $cek = DB::table('pemasukan')->where('id', $id)->first();
+        if ($cek->countUpdate === 3) {
+            return redirect()->back()->with('pesan', 'pengecekan sudah mencapai maksimal');
+        } else {
+            DB::table('pemasukan')->where('id', $id)->update([
+                'status' => 'sukses',
+                'countUpdate' => +1
+            ]);
+            return redirect()->back()->with('success', 'Data Berhasil di konfirmasi');
+        }
+    }
+    public function cancel(Request $request, $id)
+    {
+        $cek = DB::table('pemasukan')->where('id', $id)->first();
+        if ($cek->countUpdate === 3) {
+            return redirect()->back()->with('pesan', 'pengecekan sudah mencapai maksimal');
+        } else {
+            DB::table('pemasukan')->where('id', $id)->update([
+                'status' => 'cancel',
+                'countUpdate' => +1
+            ]);
+            return redirect()->back()->with('success', 'Data Berhasil di konfirmasi');
+        }
     }
 
     public function test()

@@ -21,6 +21,10 @@
         </li>
         <li class="nav-item {{ Request()->is('/NAILUL-HUDA/export') ? 'active' : '' }}">
             <a href="/NAILUL-HUDA/dataConfirm" class="nav-link "><i class="fas fa-print"></i>
+                <span>Data Konfirmasi</span></a>
+        </li>
+        <li class="nav-item {{ Request()->is('/NAILUL-HUDA/data') ? 'active' : '' }}">
+            <a href="/NAILUL-HUDA/data" class="nav-link "><i class="fas fa-print"></i>
                 <span>Data Pemasukan</span></a>
         </li>
         <li class="menu-header">Siswa</li>
