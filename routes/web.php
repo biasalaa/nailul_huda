@@ -11,6 +11,7 @@ use App\Http\Controllers\PengurusController;
 use App\Http\Controllers\TahunController;
 use App\Http\Controllers\BioController;
 use App\Http\Controllers\ActionController;
+use App\Http\Controllers\LandingController;
 
 
 
@@ -25,10 +26,11 @@ use App\Http\Controllers\ActionController;
 |
 */
 
-Route::get('/', [AuthController::class, 'index']);
+Route::get('/auth', [AuthController::class, 'index']);
 Route::post('/auth', [AuthController::class, 'auth']);
 
 
+Route::get('/', [LandingController::class, 'index']);
 Route::get('/NAILUL-HUDA/dashboard', [DashboardController::class, 'index']);
 Route::resource('/NAILUL-HUDA/kegiatan', KegiatanController::class);
 Route::resource('/NAILUL-HUDA/ketu', KetuController::class);
