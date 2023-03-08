@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Str;
 use Illuminate\Http\Request;
+use App\Exports\JurusanExport;
+use App\Imports\JurusanImport;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class JurusanController extends Controller
 {
@@ -31,7 +35,7 @@ class JurusanController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store ca newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -114,5 +118,20 @@ class JurusanController extends Controller
     {
         DB::table('jurusan')->where('id', $id)->delete();
         return redirect()->back()->with('success', 'jurusan berhasil di hapus');
+    }
+
+    public function jurusanexport()
+    {
+        return Excel::download(new JurusanExport,'jurusan.xlsx');
+    }
+
+    public function jurusanimport(Request $request)
+    {
+        $file = $request->file('file');
+        $namaFile = $file->getClientOriginalName();
+        $file->move('DataJurusan', $namaFile);
+
+        Excel::import(new JurusanImport, public_path('/DataJurusan/'.$namaFile));
+        return redirect('jurusan.index');
     }
 }

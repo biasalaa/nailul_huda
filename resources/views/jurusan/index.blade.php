@@ -11,6 +11,12 @@
         <div class="card">
             <div class="card-header">
                 <a href="/NAILUL-HUDA/jurusan/create" class="btn btn-success" style="color:white ;">Tambah Data</a>
+                <a href="{{ route('export-jurusan') }}" class="btn btn-primary" style="color:white ;">Export Data</a>
+                
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Import Data
+                </button>
             </div>
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible show fade">
@@ -78,8 +84,37 @@
                             </ul>
                         </nav>
                     </div>
+                
+
+
+                    
+
+
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('import-jurusan') }}" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Import Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    @csrf
+                    <input type="file" name="file">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Import</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

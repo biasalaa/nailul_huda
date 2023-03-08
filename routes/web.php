@@ -45,3 +45,6 @@ Route::post('/proses', [ActionController::class, 'proses']);
 Route::post('/sukses/{id}', [ActionController::class, 'sukses']);
 Route::post('/cancel/{id}', [ActionController::class, 'cancel']);
 Route::get('/NAILUL-HUDA/dataConfirm', [ActionController::class, 'konfirm']);
+
+Route::get('/export-jurusan', [JurusanController::class, 'jurusanexport'])->name('export-jurusan');
+Route::post('/import-jurusan', [JurusanController::class, 'jurusanimport'])->name('import-jurusan');
